@@ -1,11 +1,8 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import {Title}  from '../src/components/Title'
-import {InputForm}  from "../src/components/inputForm";
+import {Title}  from '../src/components/Title';
+import {InputForm}  from "../src/components/InputForm";
 import  {TodoList}  from "../src/components/TodoList";
 import { useState } from "react";
-import { BrowserRouter, Route,Link, Routes, useParams, useNavigate, useLocation } from 'react-router-dom';
+import { BrowserRouter, Route,Routes, useNavigate, useLocation } from 'react-router-dom';
 
 
 export type Task={
@@ -14,13 +11,15 @@ export type Task={
 };
 
 
-function App() {
+
+const  Home = () => {
   const [taskList, setTaskList] = useState<Task[]>([]);
   const navigation = useNavigate();
 
 const useMovePage = () =>{
-  navigation("/detailpages:",{state:2});
-};
+  navigation("/Detailpage:",{state:2});
+}
+
   return (
     <div className="body">
       <Title />
@@ -29,6 +28,7 @@ const useMovePage = () =>{
       <button onClick={useMovePage}>ボタン</button>
     </div>
   );
+
 }
 const Detailpage = () => {
   const location = useLocation()
@@ -41,12 +41,12 @@ const Detailpage = () => {
   );
 }
 
-const transition = () => {
+const  App = () => {
   return (
    <BrowserRouter>
       <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/detailpages" element={<Detailpage />} />
+          <Route path="/" element={<Home/>} />
+          <Route path="/Detailpage" element={<Detailpage />} />
       </Routes>
    </BrowserRouter>
   )

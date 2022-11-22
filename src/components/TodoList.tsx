@@ -12,6 +12,10 @@ export const TodoList = ({ taskList, setTaskList }:Props) => {
     setTaskList(taskList.filter((task:Task) => task.id !== id));
   };
 
+  const handleDetail = (id:number) => {
+
+  }
+
   const handleCompleted = (id:number) => {
     setTaskList(
       taskList.map((task:Task) => {
@@ -43,6 +47,9 @@ export const TodoList = ({ taskList, setTaskList }:Props) => {
               </button>
               <button onClick={() => handleDelete(task.id)}>
                 削除
+              </button>
+              <button onClick={() => handleDetail(task.id)}>
+                詳細
               </button>
             </div>
           </div>

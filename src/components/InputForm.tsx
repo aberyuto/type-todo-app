@@ -35,7 +35,7 @@ export const InputForm = ({ taskList, setTaskList }:Props) => {
       <form onSubmit={handleSubmit}>
         <input type="text" onChange={handleChange} value={inputText} />
         <button>
-         追加
+        追加
         </button>
       </form>
     </div>

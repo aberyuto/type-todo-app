@@ -1,12 +1,12 @@
-
 import Link from "next/link";
-import React, { useContext } from "react";
+
+import React, { useContext, useState } from "react";
+
+import DeatilDisplay from "./DetilDisplay";
 
 import { Context } from "../../pages/todos/[id]";
 
-import React from "react";
 import { Task } from "../../pages/todo";
-
 
 type Props = {
   taskList: Task[];
@@ -19,14 +19,13 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
     setTaskList(taskList.filter((task: Task) => task.id !== id));
   };
 
+  const [flag, Setflag] = useState(false);
 
   const { state, setState } = useContext(Context);
 
   const handleDetail = (id: number) => {
-    setState(id);
+    Setflag(true);
   };
-
-
 
   const handleCompleted = (id: number) => {
     
@@ -73,8 +72,10 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
               <button onClick={() => handleDetail(task.id)}>
                 <Link href="/todos/[Task.id]">詳細</Link>
               </button>
-
             </div>
+            {/* <div style={{ visibility: flag ? "visible" : "hidden" }}>
+              <DeatilDisplay />
+            </div> */}
           </div>
         ))}
       </div>

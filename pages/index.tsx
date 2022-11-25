@@ -1,6 +1,7 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import { Title } from "../src/components/Title";
+import { InputForm } from "../src/components/InputForm";
+import { TodoList } from "../src/components/TodoList";
+import { TodoProvider } from "../src/components/providers/TodoProvider";
 import { ChangeEvent, FormEvent, useState } from "react";
 import Validate from "../src/Validate/Validate";
 import Link from "next/link";
@@ -47,9 +48,15 @@ function Login() {
     );
   }
 
-
   return (
     <>
+      <div className="body">
+        <Title />
+        <InputForm taskList={taskList} setTaskList={setTaskList} />
+        <TodoProvider>
+          <TodoList taskList={taskList} setTaskList={setTaskList} />
+        </TodoProvider>
+      </div>
       <form onSubmit={(e) => HandleSubmit(e)}>
         <h1>ログインフォーム</h1>
         <hr />
@@ -95,10 +102,7 @@ function Login() {
         router.push({ pathname: "/todo" })}
     </>
   );
-};
-
-
-
+}
 
 export default Login;
 /*
@@ -169,4 +173,3 @@ function Home() {
     </div>
   );
 }*/
-

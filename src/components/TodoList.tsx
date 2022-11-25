@@ -1,7 +1,12 @@
 import Link from "next/link";
+
 import React, { useContext, useState } from "react";
-import { Task } from "../../pages";
+
 import DeatilDisplay from "./DetilDisplay";
+
+import { Context } from "../../pages/todos/[id]";
+
+import { Task } from "../../pages/todo";
 
 type Props = {
   taskList: Task[];
@@ -13,7 +18,11 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
     //filter関数tureなら残す,falseなら除外
     setTaskList(taskList.filter((task: Task) => task.id !== id));
   };
+
   const [flag, Setflag] = useState(false);
+
+  const { state, setState } = useContext(Context);
+
   const handleDetail = (id: number) => {
     Setflag(true);
   };
@@ -46,6 +55,7 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
             <div className="icons">
               <button onClick={() => handleCompleted(task.id)}>完了</button>
               <button onClick={() => handleDelete(task.id)}>削除</button>
+
               <button onClick={() => handleDetail(task.id)}>
                 <Link href="/todos/[Task.id]">詳細</Link>
               </button>

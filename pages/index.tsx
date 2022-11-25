@@ -1,29 +1,102 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import {Title}  from '../src/components/Title'
-import {InputForm}  from "../src/components/InputForm";
-import  {TodoList}  from "../src/components/TodoList";
-import { useState } from "react";
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
+import { ChangeEvent, FormEvent, useState } from "react";
+import Validate from "../src/Validate/Validate";
+import Link from "next/link";
+import { Router, useRouter } from "next/router";
 
-export type Task={
-  //オブジェクトの配列の作成
-  id:number;text:string;completed:boolean
+export type Initial = {
+  username: string;
+  mailAddres: string;
+  password: string;
 };
 
-function App() {
-  const [taskList, setTaskList] = useState<Task[]>([]);
+function Login() {
+  const initialValues = { username: "", mailAddres: "", password: "" };
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState(initialValues);
+  const [isSubmit, setIsSubmit] = useState(false);
+  const router = useRouter();
+
+  function HandleChange(props: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = props.target;
+    setFormValues({ ...formValues, [name]: value });
+  }
+
+  function HandleSubmit(props: FormEvent<HTMLFormElement>) {
+    props.preventDefault();
+    setFormErrors(Validate(formValues));
+    setIsSubmit(true);
+  }
+
+  function Foo(text: string, type: string) {
+    return (
+      <>
+        <div>
+          <label>{text}</label>
+          <input
+            type="text"
+            placeholder={text}
+            name={type}
+            onChange={(e) => HandleChange(e)}
+          ></input>
+        </div>
+      </>
+    );
+  }
+
   return (
-    <div className="body">
-      <Title />
-      <InputForm taskList={taskList} setTaskList={setTaskList} />
-      <TodoList taskList={taskList} setTaskList={setTaskList} />
-    </div>
+    <>
+      <form onSubmit={(e) => HandleSubmit(e)}>
+        <h1>ログインフォーム</h1>
+        <hr />
+        <div>
+          <div>
+            <label>ユーザー名</label>
+            <input
+              type="text"
+              placeholder="ユーザー名"
+              name="username"
+              onChange={(e) => HandleChange(e)}
+            ></input>
+          </div>
+
+          <p className="errorMsg">{formErrors.username}</p>
+          <div className="formField">
+            <label>メールアドレス</label>
+            <input
+              type="text"
+              placeholder="メールアドレス"
+              name="mailAddres"
+              onChange={(e) => HandleChange(e)}
+            ></input>
+          </div>
+          <p className="errorMsg">{formErrors.mailAddres}</p>
+          <div className="formField">
+            <label>パスワード</label>
+            <input
+              type="text"
+              placeholder="パスワード"
+              name="password"
+              onChange={(e) => HandleChange(e)}
+            ></input>
+          </div>
+          <p className="errorMsg">{formErrors.password}</p>
+          <button className="sumitbutton">ログイン</button>
+        </div>
+      </form>
+      {formErrors.username === "" &&
+        formErrors.mailAddres === "" &&
+        formErrors.password === "" &&
+        isSubmit && <div>ログインに成功しました</div> &&
+        router.push({ pathname: "/todo" })}
+    </>
   );
 }
 
-export default App;
-
+export default Login;
+/*
 function Home() {
   return (
     <div className={styles.container}>
@@ -39,7 +112,7 @@ function Home() {
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
+          Get started by editing{" "}
           <code className={styles.code}>pages/index.tsx</code>
         </p>
 
@@ -82,12 +155,12 @@ function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
-}
+  );
+}*/

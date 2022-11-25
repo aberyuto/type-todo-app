@@ -1,7 +1,12 @@
+
 import Link from "next/link";
 import React, { useContext } from "react";
-import { Task } from "../../pages";
+
 import { Context } from "../../pages/todos/[id]";
+
+import React from "react";
+import { Task } from "../../pages/todo";
+
 
 type Props = {
   taskList: Task[];
@@ -14,11 +19,14 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
     setTaskList(taskList.filter((task: Task) => task.id !== id));
   };
 
+
   const { state, setState } = useContext(Context);
 
   const handleDetail = (id: number) => {
     setState(id);
   };
+
+
 
   const handleCompleted = (id: number) => {
     setTaskList(
@@ -48,9 +56,11 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
             <div className="icons">
               <button onClick={() => handleCompleted(task.id)}>完了</button>
               <button onClick={() => handleDelete(task.id)}>削除</button>
+
               <button onClick={() => handleDetail(task.id)}>
                 <Link href="/todos/[Task.id]">詳細</Link>
               </button>
+
             </div>
           </div>
         ))}

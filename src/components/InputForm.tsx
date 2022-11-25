@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { Task } from "../../pages/todo";
+
+import { Task } from "../../pages";
+import a from "../../pages/details/a";
+
 
 type Props = {
   taskList: Task[];
@@ -12,16 +15,18 @@ export const InputForm = ({ taskList, setTaskList }: Props) => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     //console.log();
-    setTaskList([
-      //第一引数に最初のオブジェクトの情報
-      //第二引数にオブジェクト
-      ...taskList,
-      {
-        id: taskList.length,
-        text: inputText,
-        completed: false,
-      },
-    ]);
+    if (inputText != "") {
+      setTaskList([
+        //第一引数に最初のオブジェクトの情報
+        //第二引数にオブジェクト
+        ...taskList,
+        {
+          id: taskList.length,
+          text: inputText,
+          completed: false,
+        },
+      ]);
+    }
     setInputText("");
   };
 

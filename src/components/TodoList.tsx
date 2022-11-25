@@ -29,18 +29,31 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
 
 
   const handleCompleted = (id: number) => {
+    
+    const comp = [...taskList];
     setTaskList(
-      taskList.map((task: Task) => {
+      comp.map((task) => {
         if (id === task.id) {
-          return {
-            ...task,
-            //trueからfalseに変換
-            completed: !task.completed,
-          };
-        }
+          task.completed = !task.completed;
+               
+        } 
         return task;
       })
-    );
+   );
+   
+    /*setTaskList(
+      taskList.map((task) => {
+        if (id === task.id) {
+          return {     
+            ...task,
+            //trueからfalseに変換
+            completed: !task.completed,     
+        };
+        }
+        
+        return task;
+      })
+   );*/
   };
   return (
     <div className="todoList">

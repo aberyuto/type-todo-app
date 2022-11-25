@@ -11,7 +11,7 @@ export default function DeatilDisplay() {
       <p>コンテンツの詳細</p>
       <p>内容</p>
       <button>
-        <Link href="/">戻る</Link>
+        <Link href="/todo">戻る</Link>
       </button>
     </div>
   );

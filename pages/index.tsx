@@ -7,7 +7,6 @@ import Validate from "../src/Validate/Validate";
 import Link from "next/link";
 import { Router, useRouter } from "next/router";
 
-
 export type Initial = {
   username: string;
   mailAddres: string;
@@ -50,13 +49,6 @@ function Login() {
 
   return (
     <>
-      <div className="body">
-        <Title />
-        <InputForm taskList={taskList} setTaskList={setTaskList} />
-        <TodoProvider>
-          <TodoList taskList={taskList} setTaskList={setTaskList} />
-        </TodoProvider>
-      </div>
       <form onSubmit={(e) => HandleSubmit(e)}>
         <h1>ログインフォーム</h1>
         <hr />
@@ -92,14 +84,18 @@ function Login() {
             ></input>
           </div>
           <p className="errorMsg">{formErrors.password}</p>
-          <button className="sumitbutton">ログイン</button>
+          {
+            //<button className="sumitbutton">ログイン</button>
+          }
         </div>
       </form>
-      {formErrors.username === "" &&
-        formErrors.mailAddres === "" &&
-        formErrors.password === "" &&
-        isSubmit && <div>ログインに成功しました</div> &&
-        router.push({ pathname: "/todo" })}
+
+      <Link href="/todo">
+        <button>ログインテスト</button>
+      </Link>
+      {
+        //{formErrors.username === "" &&formErrors.mailAddres === "" &&formErrors.password === "" &&isSubmit && <div>ログインに成功しました</div> &&router.push({ pathname: "/todo" })}
+      }
     </>
   );
 }

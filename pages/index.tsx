@@ -2,6 +2,8 @@ import { Title } from "../src/components/Title";
 import { InputForm } from "../src/components/InputForm";
 import { TodoList } from "../src/components/TodoList";
 import { useState } from "react";
+import { ReactDOM } from "react";
+import { TodoProvider } from "../src/components/providers/TodoProvider";
 
 export type Task = {
   //オブジェクトの配列の作成
@@ -13,13 +15,13 @@ export type Task = {
 const App = () => {
   const [taskList, setTaskList] = useState<Task[]>([]);
 
-  const useMovePage = () => {};
-
   return (
     <div className="body">
       <Title />
       <InputForm taskList={taskList} setTaskList={setTaskList} />
-      <TodoList taskList={taskList} setTaskList={setTaskList} />
+      <TodoProvider>
+        <TodoList taskList={taskList} setTaskList={setTaskList} />
+      </TodoProvider>
     </div>
   );
 };

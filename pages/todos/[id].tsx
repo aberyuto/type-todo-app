@@ -1,6 +1,9 @@
 import { useRouter } from "next/router";
 import { createContext, useState } from "react";
 import type { AppProps } from "next/app";
+import Link from "next/link";
+import DeatilDisplay from "../../src/components/DetilDisplay";
+import { Title } from "../../src/components/Title";
 
 export const Context = createContext<{
   state: number;
@@ -14,10 +17,8 @@ export default function DetailPage({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <p>詳細ページ</p>
-      <Context.Provider value={{ state, setState }}>
-        <Component {...pageProps} />
-      </Context.Provider>
+      <Title />
+      <DeatilDisplay />
     </>
   );
 }

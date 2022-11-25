@@ -6,6 +6,7 @@ import Validate from "../src/Validate/Validate";
 import Link from "next/link";
 import { Router, useRouter } from "next/router";
 
+
 export type Initial = {
   username: string;
   mailAddres: string;

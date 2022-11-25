@@ -4,6 +4,7 @@ import { InputForm } from "../src/components/InputForm";
 import { TodoList } from "../src/components/TodoList";
 import { useState } from "react";
 import Link from "next/link";
+import { Completed } from '../src/components/Completed';
 
 export type Task = {
   //オブジェクトの配列の作成
@@ -20,6 +21,8 @@ function App() {
         <Title />
         <InputForm taskList={taskList} setTaskList={setTaskList} />
         <TodoList taskList={taskList} setTaskList={setTaskList} />
+        <p>完了リスト一覧</p>
+      <Completed taskList={taskList} setTaskList={setTaskList} />
       </div>
       <Link href="/login">
         <button>ログインテスト</button>

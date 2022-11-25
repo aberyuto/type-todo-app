@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Task } from "../../pages";
+import { Task } from "../../pages/todo";
 import a from "../../pages/details/a";
 
 

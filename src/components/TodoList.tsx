@@ -34,7 +34,9 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
       comp.map((task) => {
         if (id === task.id) {
           task.completed = !task.completed;
-               
+          if(task.completed === true){
+            setTaskList(taskList.filter((task: Task) => task.completed !== true));
+          }   
         } 
         return task;
       })
@@ -63,15 +65,24 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
             key={index}
           >
             <div className="todoText">
-              <span>{task.text}</span>
+              <span>{task.completed == false ? (
+                          <p>{task.text}
+                      <div><button onClick={() => handleCompleted(task.id)}>
+                            完了
+                          </button>
+                          <button onClick={() => handleDelete(task.id)}>
+                            削除
+                          </button>
+                          <button onClick={() => handleDetail(task.id)}>
+                            <Link href="/todos/[Task.id]">詳細</Link>
+                          </button>
+                      </div>
+                          </p>):(
+                            <p></p>
+                          )}
+              </span>
             </div>
             <div className="icons">
-              <button onClick={() => handleCompleted(task.id)}>完了</button>
-              <button onClick={() => handleDelete(task.id)}>削除</button>
-
-              <button onClick={() => handleDetail(task.id)}>
-                <Link href="/todos/[Task.id]">詳細</Link>
-              </button>
             </div>
             {/* <div style={{ visibility: flag ? "visible" : "hidden" }}>
               <DeatilDisplay />

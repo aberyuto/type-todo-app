@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Task } from "../../pages";
+import { Task } from "../../pages/todo";
+import Link from "next/link";
 
 type Props={
     taskList: Task[],
@@ -13,6 +14,11 @@ type Props={
       setTaskList(taskList.filter((task) => task.id !== id));
     };
 
+    const [flag, Setflag] = useState(false);
+    const handleDetail = (id: number) => {
+      Setflag(true);
+    };
+
     return (
         <div>
           <div>
@@ -21,9 +27,13 @@ type Props={
                     <div>     
                         <span>{task.completed == true ? (
                           <p>{task.text}
-                          <button onClick={() => handleDelete(task.id)}>
+                      <div><button onClick={() => handleDelete(task.id)}>
                             削除
                           </button>
+                          <button onClick={() => handleDetail(task.id)}>
+                            <Link href="/todos/[Task.id]">詳細</Link>
+                          </button>
+                      </div>
                           </p>                          
                         ):(
                           <p></p>

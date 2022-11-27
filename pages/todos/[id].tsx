@@ -1,10 +1,8 @@
 import { useRouter } from "next/router";
 import { createContext, useState } from "react";
-import type { AppProps } from "next/app";
 import { DeatilDisplay } from "../../src/components/DetilDisplay";
 import { Title } from "../../src/components/Title";
 import { Task } from "../todo";
-import { TodoProvider } from "../../src/components/providers/TodoProvider";
 
 export const Context = createContext<{
   state: number;
@@ -19,7 +17,7 @@ export default function DetailPage() {
   return (
     <>
       <Title />
-      <DeatilDisplay taskList={taskList} setTaskList={setTaskList} />
+      <DeatilDisplay />
     </>
   );
 }

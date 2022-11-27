@@ -5,6 +5,8 @@ import { TodoList } from "../src/components/TodoList";
 import { useState } from "react";
 import Link from "next/link";
 import { Completed } from "../src/components/Completed";
+import { DeatilDisplay } from "../src/components/DetilDisplay";
+import React from "react";
 
 export type Task = {
   //オブジェクトの配列の作成
@@ -13,8 +15,21 @@ export type Task = {
   completed: boolean;
 };
 
+type ContextType = {
+  id: number;
+  text: string;
+  completed: boolean;
+  setTaskList: (teskList: Task[]) => void;
+};
+const taskContext = React.createContext({} as ContextType);
+function Provider() {
+  <taskContext.Provider value={(taskList, setTaskList)}>
+    <DeatilDisplay />
+  </taskContext.Provider>;
+}
 function App() {
   const [taskList, setTaskList] = useState<Task[]>([]);
+
   return (
     <>
       <div className="body">
@@ -23,6 +38,7 @@ function App() {
         <TodoList taskList={taskList} setTaskList={setTaskList} />
         <p>完了リスト一覧</p>
         <Completed taskList={taskList} setTaskList={setTaskList} />
+        {/* <DeatilDisplay taskList={taskList} setTaskList={setTaskList} /> */}
       </div>
     </>
   );

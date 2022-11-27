@@ -1,24 +1,25 @@
 import { useRouter } from "next/router";
 import { createContext, useState } from "react";
 import type { AppProps } from "next/app";
-import Link from "next/link";
-import DeatilDisplay from "../../src/components/DetilDisplay";
+import { DeatilDisplay } from "../../src/components/DetilDisplay";
 import { Title } from "../../src/components/Title";
+import { Task } from "../todo";
+import { TodoProvider } from "../../src/components/providers/TodoProvider";
 
 export const Context = createContext<{
   state: number;
   setState: (val: number) => void;
 }>({ state: 0, setState: () => {} });
 
-export default function DetailPage({ Component, pageProps }: AppProps) {
+export default function DetailPage() {
   const router = useRouter();
   const id = router.query.id as string;
-  const [state, setState] = useState(0);
+  const [taskList, setTaskList] = useState<Task[]>([]);
 
   return (
     <>
       <Title />
-      <DeatilDisplay />
+      <DeatilDisplay taskList={taskList} setTaskList={setTaskList} />
     </>
   );
 }

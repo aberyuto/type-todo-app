@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 
-import { Task } from "../../pages";
-import a from "../../pages/details/a";
-
+import { Task } from "../../pages/todo";
 
 type Props = {
   taskList: Task[];
@@ -33,6 +31,7 @@ export const InputForm = ({ taskList, setTaskList }: Props) => {
   const handleChange = (e: any) => {
     setInputText(e.target.value);
   };
+
   return (
     <div className="inputForm">
       <form onSubmit={handleSubmit}>

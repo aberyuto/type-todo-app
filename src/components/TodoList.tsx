@@ -1,12 +1,8 @@
 import Link from "next/link";
-
-import React, { useContext, useState } from "react";
-
-import DeatilDisplay from "./DetilDisplay";
-
+import React, { createContext, useContext, useState } from "react";
 import { Context } from "../../pages/todos/[id]";
-
 import { Task } from "../../pages/todo";
+import { DeatilDisplay } from "./DetilDisplay";
 
 type Props = {
   taskList: Task[];
@@ -19,40 +15,20 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
     setTaskList(taskList.filter((task: Task) => task.id !== id));
   };
 
-  const [flag, Setflag] = useState(false);
-
-  const { state, setState } = useContext(Context);
-
-  const handleDetail = (id: number) => {
-    Setflag(true);
-  };
-
   const handleCompleted = (id: number) => {
-    
     const comp = [...taskList];
     setTaskList(
       comp.map((task) => {
         if (id === task.id) {
           task.completed = !task.completed;
-               
-        } 
-        return task;
-      })
-   );
-   
-    /*setTaskList(
-      taskList.map((task) => {
-        if (id === task.id) {
-          return {     
-            ...task,
-            //trueからfalseに変換
-            completed: !task.completed,     
-        };
         }
-        
         return task;
       })
-   );*/
+    );
+  };
+
+  const handleDetail = (id: number) => {
+    const comp = [...taskList];
   };
   return (
     <div className="todoList">
@@ -68,14 +44,10 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
             <div className="icons">
               <button onClick={() => handleCompleted(task.id)}>完了</button>
               <button onClick={() => handleDelete(task.id)}>削除</button>
-
               <button onClick={() => handleDetail(task.id)}>
                 <Link href="/todos/[Task.id]">詳細</Link>
               </button>
             </div>
-            {/* <div style={{ visibility: flag ? "visible" : "hidden" }}>
-              <DeatilDisplay />
-            </div> */}
           </div>
         ))}
       </div>

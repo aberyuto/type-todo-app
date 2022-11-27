@@ -1,18 +1,25 @@
-import { Component } from "react";
-import { Context } from "../../pages/_app";
-import type { AppProps } from "next/app";
-import { TodoContext } from "./providers/TodoProvider";
-import Link from "next/link";
+import React, { useState } from "react";
+import { Task } from "../../pages/todo";
+type Props = {
+  taskList: Task[];
+  setTaskList: (taskList: Task[]) => void;
+};
 
-export default function DeatilDisplay() {
+export const DeatilDisplay = ({ taskList, setTaskList }: Props) => {
   return (
     <div>
-      <h3>詳細ページ</h3>
-      <p>コンテンツの詳細</p>
-      <p>内容</p>
-      <button>
-        <Link href="/todo">戻る</Link>
-      </button>
+      <p>詳細ページ</p>
+      <div>
+        {taskList.map((task, index) => (
+          <div key={index}>
+            <div>
+              <span>
+                {task.completed == false ? <p>{task.text}</p> : <p></p>}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
-}
+};

@@ -6,6 +6,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import Validate from "../src/Validate/Validate";
 import Link from "next/link";
 import { Router, useRouter } from "next/router";
+import { Button } from "@mantine/core";
 
 export type Initial = {
   username: string;
@@ -20,36 +21,37 @@ function Login() {
   const [isSubmit, setIsSubmit] = useState(false);
   const router = useRouter();
 
-  function HandleChange(props: ChangeEvent<HTMLInputElement>) {
+  function handleChange(props: ChangeEvent<HTMLInputElement>) {
     const { name, value } = props.target;
     setFormValues({ ...formValues, [name]: value });
   }
 
-  function HandleSubmit(props: FormEvent<HTMLFormElement>) {
+  function handleSubmit(props: FormEvent<HTMLFormElement>) {
     props.preventDefault();
-    setFormErrors(Validate(formValues));
-    setIsSubmit(true);
+    const { isError, ...error } = Validate(formValues);
+
+    // errorがあったら
+    if (isError) {
+      setFormErrors(error);
+    } else {
+      router.push({ pathname: "/todo" });
+    }
+
+    //setFormErrors(error);
+    //setIsSubmit(true);
   }
 
-  function Foo(text: string, type: string) {
+  function Demo() {
     return (
-      <>
-        <div>
-          <label>{text}</label>
-          <input
-            type="text"
-            placeholder={text}
-            name={type}
-            onChange={(e) => HandleChange(e)}
-          ></input>
-        </div>
-      </>
+      <Button color="lime" radius="md" size="md" onSubmit={() => handleSubmit}>
+        Settings
+      </Button>
     );
   }
 
   return (
     <>
-      <form onSubmit={(e) => HandleSubmit(e)}>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <h1>ログインフォーム</h1>
         <hr />
         <div>
@@ -59,10 +61,9 @@ function Login() {
               type="text"
               placeholder="ユーザー名"
               name="username"
-              onChange={(e) => HandleChange(e)}
+              onChange={(e) => handleChange(e)}
             ></input>
           </div>
-
           <p className="errorMsg">{formErrors.username}</p>
           <div className="formField">
             <label>メールアドレス</label>
@@ -70,7 +71,7 @@ function Login() {
               type="text"
               placeholder="メールアドレス"
               name="mailAddres"
-              onChange={(e) => HandleChange(e)}
+              onChange={(e) => handleChange(e)}
             ></input>
           </div>
           <p className="errorMsg">{formErrors.mailAddres}</p>
@@ -80,21 +81,16 @@ function Login() {
               type="text"
               placeholder="パスワード"
               name="password"
-              onChange={(e) => HandleChange(e)}
+              onChange={(e) => handleChange(e)}
             ></input>
           </div>
           <p className="errorMsg">{formErrors.password}</p>
-          {
-            //<button className="sumitbutton">ログイン</button>
-          }
         </div>
+        <Demo />
       </form>
 
-      <Link href="/todo">
-        <button>ログインテスト</button>
-      </Link>
       {
-        //{formErrors.username === "" &&formErrors.mailAddres === "" &&formErrors.password === "" &&isSubmit && <div>ログインに成功しました</div> &&router.push({ pathname: "/todo" })}
+        //<Link href="/todo"><button>ログインテスト</button></Link>
       }
     </>
   );

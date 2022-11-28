@@ -4,11 +4,10 @@ import React, { useContext, useState } from "react";
 
 import DeatilDisplay from "./DetilDisplay";
 
-import { Context } from "../../pages/todos/[id]";
-
 import { Task } from "../../pages/todo";
+//import { Context } from "../../pages/_app";
 
-type Props = {
+export type Props = {
   taskList: Task[];
   setTaskList: (taskList: Task[]) => void;
 };
@@ -21,25 +20,23 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
 
   const [flag, Setflag] = useState(false);
 
-  const { state, setState } = useContext(Context);
+  //const { state, setState } = useContext(Context);
 
   const handleDetail = (id: number) => {
     Setflag(true);
   };
 
   const handleCompleted = (id: number) => {
-    
     const comp = [...taskList];
     setTaskList(
       comp.map((task) => {
         if (id === task.id) {
           task.completed = !task.completed;
-               
-        } 
+        }
         return task;
       })
-   );
-   
+    );
+
     /*setTaskList(
       taskList.map((task) => {
         if (id === task.id) {
@@ -70,12 +67,14 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
               <button onClick={() => handleDelete(task.id)}>削除</button>
 
               <button onClick={() => handleDetail(task.id)}>
-                <Link href="/todos/[Task.id]">詳細</Link>
+                <Link href={`/${task.id}/detail`}>詳細</Link>
               </button>
             </div>
-            {/* <div style={{ visibility: flag ? "visible" : "hidden" }}>
+            {/*
+            <div style={{ visibility: flag ? "visible" : "hidden" }}>
               <DeatilDisplay />
-            </div> */}
+            </div>
+            */}
           </div>
         ))}
       </div>

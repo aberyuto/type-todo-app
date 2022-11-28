@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
-import { Task } from "../../pages";
 import a from "../../pages/details/a";
-
+import { Task } from "../../pages/todo";
 
 type Props = {
   taskList: Task[];

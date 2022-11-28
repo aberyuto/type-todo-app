@@ -22,7 +22,7 @@ export default function Validate(
 
   if (!props.password) {
     isError = true;
-    errors.password = "ユーザ名を入力してください";
+    errors.password = "パスワードを入力してください";
   } else if (props.password.length < 4) {
     isError = true;
     errors.password = "4文字以上15文字以下のパスワードを入力してください";

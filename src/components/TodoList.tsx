@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import { Button } from "@mantine/core";
 import React, { useContext, useState } from "react";
 
 import DeatilDisplay from "./DetilDisplay";
@@ -36,21 +36,8 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
         return task;
       })
     );
-
-    /*setTaskList(
-      taskList.map((task) => {
-        if (id === task.id) {
-          return {     
-            ...task,
-            //trueからfalseに変換
-            completed: !task.completed,     
-        };
-        }
-        
-        return task;
-      })
-   );*/
   };
+
   return (
     <div className="todoList">
       <div className="todos">
@@ -63,18 +50,35 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
               <span>{task.text}</span>
             </div>
             <div className="icons">
-              <button onClick={() => handleCompleted(task.id)}>完了</button>
-              <button onClick={() => handleDelete(task.id)}>削除</button>
-
-              <button onClick={() => handleDetail(task.id)}>
-                <Link href={`/${task.id}/detail`}>詳細</Link>
-              </button>
+              <Button.Group>
+                <Button
+                  radius="xl"
+                  size="sm"
+                  variant="outline"
+                  color="green"
+                  onClick={() => handleCompleted(task.id)}
+                >
+                  完了
+                </Button>
+                <Button
+                  radius="xl"
+                  size="sm"
+                  variant="outline"
+                  color="red"
+                  onClick={() => handleDelete(task.id)}
+                >
+                  削除
+                </Button>
+                <Button
+                  radius="xl"
+                  size="sm"
+                  variant="outline"
+                  onClick={() => handleDetail(task.id)}
+                >
+                  <Link href={`/${task.id}/detail`}>詳細</Link>
+                </Button>
+              </Button.Group>
             </div>
-            {/*
-            <div style={{ visibility: flag ? "visible" : "hidden" }}>
-              <DeatilDisplay />
-            </div>
-            */}
           </div>
         ))}
       </div>

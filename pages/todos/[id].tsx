@@ -17,7 +17,7 @@ export default function DetailPage() {
   return (
     <>
       <Title />
-      <DeatilDisplay />
+      <DeatilDisplay></DeatilDisplay>
     </>
   );
 }

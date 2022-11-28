@@ -28,8 +28,17 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
   };
 
   const handleDetail = (id: number) => {
-    const comp = [...taskList];
+    const detail = [...taskList];
+    setTaskList(
+      detail.map((task) => {
+        if (id === task.id) {
+          task.detail = !task.detail;
+        }
+        return task;
+      })
+    );
   };
+
   return (
     <div className="todoList">
       <div className="todos">
@@ -44,9 +53,7 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
             <div className="icons">
               <button onClick={() => handleCompleted(task.id)}>完了</button>
               <button onClick={() => handleDelete(task.id)}>削除</button>
-              <button onClick={() => handleDetail(task.id)}>
-                <Link href="/todos/[Task.id]">詳細</Link>
-              </button>
+              <button onClick={() => handleDetail(task.id)}>詳細</button>
             </div>
           </div>
         ))}

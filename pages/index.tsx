@@ -1,7 +1,6 @@
 import { Title } from "../src/components/Title";
 import { InputForm } from "../src/components/InputForm";
 import { TodoList } from "../src/components/TodoList";
-import { TodoProvider } from "../src/components/providers/TodoProvider";
 import { ChangeEvent, FormEvent, useState } from "react";
 import Validate from "../src/Validate/Validate";
 import Link from "next/link";

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { Button } from "@mantine/core";
+import { Input } from "@mantine/core";
 
-import { Task } from "../../pages";
 import a from "../../pages/details/a";
-
+import { Task } from "../../pages/todo";
 
 type Props = {
   taskList: Task[];
@@ -33,11 +34,26 @@ export const InputForm = ({ taskList, setTaskList }: Props) => {
   const handleChange = (e: any) => {
     setInputText(e.target.value);
   };
+
+  function Demo() {
+    return <Input placeholder="Your email" radius="xl" size="lg" />;
+  }
+
   return (
     <div className="inputForm">
       <form onSubmit={handleSubmit}>
-        <input type="text" onChange={handleChange} value={inputText} />
-        <button>追加</button>
+        <Input
+          placeholder="追加するタスクを入力..."
+          radius="xl"
+          size="lg"
+          type="text"
+          onChange={handleChange}
+          value={inputText}
+        />
+
+        <Button variant="outline" radius="xl" size="lg">
+          追加
+        </Button>
       </form>
     </div>
   );

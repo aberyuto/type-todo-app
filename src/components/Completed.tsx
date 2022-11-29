@@ -9,8 +9,15 @@ type Props = {
 
 export const Completed = ({ taskList, setTaskList }: Props) => {
   const handleDelete = (id: number) => {
-    //filter関数tureなら残す,falseなら除外
-    setTaskList(taskList.filter((task) => task.id !== id));
+    const comp = [...taskList];
+    setTaskList(
+      comp.map((task) => {
+        if (id === task.id) {
+          task.completed = !task.completed;
+        }
+        return task;
+      })
+    );
   };
 
   return (

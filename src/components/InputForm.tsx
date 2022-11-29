@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import { Button } from "@mantine/core";
 import { Input } from "@mantine/core";
-
 import a from "../../pages/details/a";
 import { Task } from "../../pages/todo";
+import { DateList, SimpleDatePicker } from "./Calendar";
 
 type Props = {
   taskList: Task[];
   setTaskList: (teskList: Task[]) => void;
 };
 
-export const InputForm = ({ taskList, setTaskList }: Props) => {
+type Props2 = {
+  startDate: DateList[];
+  setDate: (startDate: DateList[]) => void;
+};
+
+export const InputForm = (
+  { taskList, setTaskList }: Props,
+  { startDate, setDate }: Props2
+) => {
   const [inputText, setInputText] = useState("");
 
   const handleSubmit = (e: any) => {
@@ -30,7 +38,16 @@ export const InputForm = ({ taskList, setTaskList }: Props) => {
     }
     setInputText("");
   };
-
+  const handleDateSubmit = (e: any) => {
+    e.preventDefault();
+    setDate([
+      ...startDate,
+      {
+        id: startDate.length,
+        date: e.taget.value,
+      },
+    ]);
+  };
   const handleChange = (e: any) => {
     setInputText(e.target.value);
   };
@@ -50,8 +67,8 @@ export const InputForm = ({ taskList, setTaskList }: Props) => {
           onChange={handleChange}
           value={inputText}
         />
-
-        <Button variant="outline" radius="xl" size="lg">
+        <SimpleDatePicker />
+        <Button onClick={handleSubmit} variant="outline" radius="xl" size="lg">
           追加
         </Button>
       </form>

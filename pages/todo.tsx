@@ -7,19 +7,27 @@ import Link from "next/link";
 import { Completed } from "../src/components/Completed";
 import task_list from "../src/list/task_list";
 import { TodoContext } from "../src/components/providers/TodoProvider";
-import { TodosContext } from "./_app";
+import { DetailContext, TodosContext } from "./_app";
+import { DetailList } from "../src/components/DetilDisplay";
 
 export type Task = {
   //オブジェクトの配列の作成
   id: number;
   text: string;
   completed: boolean;
+  item?: string[];
+};
+
+type Item = {
+  item: string;
+  setItem: (detail: DetailList[]) => void;
 };
 
 function App() {
   //const [taskList, setTaskList] = useState<Task[]>([]);
 
   const { taskList, setTaskList } = useContext(TodosContext);
+  const { detailList, setDetailList } = useContext(DetailContext);
 
   return (
     <>
@@ -27,6 +35,7 @@ function App() {
         <Title />
         <InputForm taskList={taskList} setTaskList={setTaskList} />
         <TodoList taskList={taskList} setTaskList={setTaskList} />
+        {console.log(taskList)}
         <p>完了リスト一覧</p>
         <Completed taskList={taskList} setTaskList={setTaskList} />
       </div>

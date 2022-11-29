@@ -7,7 +7,7 @@ import { Task } from "../../pages/todo";
 
 type Props = {
   taskList: Task[];
-  setTaskList: (teskList: Task[]) => void;
+  setTaskList: (taskList: Task[]) => void;
 };
 
 export const InputForm = ({ taskList, setTaskList }: Props) => {
@@ -34,10 +34,6 @@ export const InputForm = ({ taskList, setTaskList }: Props) => {
   const handleChange = (e: any) => {
     setInputText(e.target.value);
   };
-
-  function Demo() {
-    return <Input placeholder="Your email" radius="xl" size="lg" />;
-  }
 
   return (
     <div className="inputForm">

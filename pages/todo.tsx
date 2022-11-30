@@ -15,7 +15,7 @@ export type Task = {
   id: number;
   text: string;
   completed: boolean;
-  item?: string[];
+  item: string[];
 };
 
 type Item = {

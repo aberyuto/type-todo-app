@@ -14,7 +14,7 @@ export type DetailList = {
   item: string;
 };
 
-const array: string[] = [];
+let array: string[] = [];
 
 export default function DeatilDisplay({
   task,
@@ -22,6 +22,8 @@ export default function DeatilDisplay({
   setTaskList,
 }: TaskDetail_props) {
   const [inputText, setInputText] = useState("");
+
+  array = task.item;
 
   const handleChange = (e: any) => {
     setInputText(e.target.value);
@@ -35,36 +37,26 @@ export default function DeatilDisplay({
     console.log(detailList);
   };
 
-  // const handleSubmit = (e: any) => {
-  //   e.preventDefault();
-  //   //console.log();
-  //   if (inputText != "") {
-  //     setTaskList([
-  //       //第一引数に最初のオブジェクトの情報
-  //       //第二引数にオブジェクト
-  //       ...taskList,
-  //       {
-  //         ...task,
-  //         detailList: { item: inputText },
-  //       },
-  //     ]);
-  //   }
-  //   setInputText("");
-  // };
-
-  const handleItem = (e: any) => {
+  const handleItem = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // setTaskList([...taskList, { ...task }]);
-    array?.push(inputText);
+    array.push(inputText);
+    const newTaskList = taskList.map((t) => {
+      if (t.id === task.id) {
+        return { ...task, item: array };
+      }
+      return t;
+    });
+    setTaskList(newTaskList);
 
     setInputText("");
     {
-      console.log(array[0]);
+      console.log(array);
     }
   };
 
   const backbutton = () => {
-    setTaskList([...taskList, { ...task, item: array }]);
+    array = task.item;
   };
 
   return (

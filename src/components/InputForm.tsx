@@ -25,6 +25,7 @@ export const InputForm = ({ taskList, setTaskList }: Props) => {
           id: taskList.length,
           text: inputText,
           completed: false,
+          item: [],
         },
       ]);
     }

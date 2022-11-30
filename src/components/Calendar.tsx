@@ -8,11 +8,15 @@ export type DateList = {
 };
 
 export const SimpleDatePicker = () => {
-  const initialDate = new Date();
-  const [startDate, setDate] = useState(initialDate);
-  const handleChange = (e: any) => {
-    setDate(e.target.value);
-  };
+  const today = new Date();
+  const [date, setDate] = useState(today);
 
-  return <DatePicker selected={startDate} onChange={handleChange} />;
+  return (
+    <DatePicker
+      selected={date}
+      onChange={(selectedDate) => {
+        setDate(selectedDate || today);
+      }}
+    />
+  );
 };

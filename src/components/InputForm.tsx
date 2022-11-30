@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@mantine/core";
 import { Input } from "@mantine/core";
-import a from "../../pages/details/a";
 import { Task } from "../../pages/todo";
 import { DateList, SimpleDatePicker } from "./Calendar";
 
@@ -11,23 +10,27 @@ type Props = {
 };
 
 type Props2 = {
-  startDate: DateList[];
-  setDate: (startDate: DateList[]) => void;
+  submitdate: DateList[];
+  setSubmitDate: (date: DateList[]) => void;
 };
 
 export const InputForm = (
   { taskList, setTaskList }: Props,
-  { startDate, setDate }: Props2
+  { submitdate, setSubmitDate }: Props2
 ) => {
   const [inputText, setInputText] = useState("");
 
   const handleSubmit = (e: any) => {
-    e.preventDefault();
-    //console.log();
     if (inputText != "") {
+      setSubmitDate([
+        {
+          id: taskList.length,
+          date: e.taget.date,
+        },
+      ]);
+
+      e.preventDefault();
       setTaskList([
-        //第一引数に最初のオブジェクトの情報
-        //第二引数にオブジェクト
         ...taskList,
         {
           id: taskList.length,
@@ -38,16 +41,18 @@ export const InputForm = (
     }
     setInputText("");
   };
-  const handleDateSubmit = (e: any) => {
-    e.preventDefault();
-    setDate([
-      ...startDate,
-      {
-        id: startDate.length,
-        date: e.taget.value,
-      },
-    ]);
-  };
+
+  // const handleDate = (e: any) => {
+  //   e.preventDefault();
+  //   setDate([
+  //     ...date,
+  //     {
+  //       id: date.length,
+  //       date: e.taget.value,
+  //     },
+  //   ]);
+  // };
+
   const handleChange = (e: any) => {
     setInputText(e.target.value);
   };

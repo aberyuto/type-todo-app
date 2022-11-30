@@ -1,9 +1,6 @@
 import Link from "next/link";
 import { Button } from "@mantine/core";
 import React, { useContext, useState } from "react";
-
-import DeatilDisplay from "./DetilDisplay";
-
 import { Task } from "../../pages/todo";
 //import { Context } from "../../pages/_app";
 

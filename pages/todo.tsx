@@ -13,6 +13,8 @@ export type Task = {
   completed: boolean;
 };
 
+export type DateList = { tododate: Date };
+
 function App() {
   //const [taskList, setTaskList] = useState<Task[]>([]);
 

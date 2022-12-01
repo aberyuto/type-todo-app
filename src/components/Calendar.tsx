@@ -9,14 +9,18 @@ export type DateList = {
 
 export const SimpleDatePicker = () => {
   const today = new Date();
-  const [date, setDate] = useState(today);
-
+  const [startDate, setStartDate] = useState(null);
   return (
-    <DatePicker
-      selected={date}
-      onChange={(selectedDate) => {
-        setDate(selectedDate || today);
-      }}
-    />
+    <>
+      <p>
+        完了期限:
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          openToDate={new Date(today)}
+          placeholderText="完了日を選択してください"
+        />
+      </p>
+    </>
   );
 };

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@mantine/core";
 import React, { useContext, useState } from "react";
 import { Task } from "../../pages/todo";
+import { SimpleDatePicker } from "./Calendar";
 //import { Context } from "../../pages/_app";
 
 export type Props = {
@@ -45,6 +46,7 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
           >
             <div className="todoText">
               <span>{task.text}</span>
+              <SimpleDatePicker />
             </div>
             <div className="icons">
               <Button.Group>

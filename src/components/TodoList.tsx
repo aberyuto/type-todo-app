@@ -3,14 +3,15 @@ import { Button } from "@mantine/core";
 import React, { useContext, useState } from "react";
 import { Task } from "../../pages/todo";
 import { SimpleDatePicker } from "./Calendar";
+import { DateContext } from "../../pages/_app";
 //import { Context } from "../../pages/_app";
-
 export type Props = {
   taskList: Task[];
   setTaskList: (taskList: Task[]) => void;
 };
 
 export const TodoList = ({ taskList, setTaskList }: Props) => {
+  const { startDate, setStartDate } = useContext(DateContext);
   const handleDelete = (id: number) => {
     //filter関数tureなら残す,falseなら除外
     setTaskList(taskList.filter((task: Task) => task.id !== id));
@@ -45,8 +46,13 @@ export const TodoList = ({ taskList, setTaskList }: Props) => {
             key={index}
           >
             <div className="todoText">
-              <span>{task.text}</span>
-              <SimpleDatePicker />
+              <span>
+                <h2>{task.text}</h2>
+              </span>
+              <SimpleDatePicker
+                startDate={startDate}
+                setStartDate={setStartDate}
+              />
             </div>
             <div className="icons">
               <Button.Group>

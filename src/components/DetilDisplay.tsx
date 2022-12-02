@@ -3,6 +3,12 @@ import Link from "next/link";
 import { Task } from "../../pages/todo";
 import { Button } from "@mantine/core";
 import { Input } from "@mantine/core";
+import { useContext } from "react";
+import type { AppProps } from "next/app";
+import { TodoContext } from "./providers/TodoProvider";
+
+import { SimpleDatePicker } from "./Calendar";
+import { DateContext } from "../../pages/_app";
 
 type TaskDetail_props = {
   task: Task;
@@ -59,6 +65,8 @@ export default function DeatilDisplay({
     array = task.item;
   };
 
+  const { startDate, setStartDate } = useContext(DateContext);
+
   return (
     <div>
       <h3>{task.text}</h3>
@@ -80,6 +88,7 @@ export default function DeatilDisplay({
       ))}
 
       <p>内容</p>
+      <SimpleDatePicker startDate={startDate} setStartDate={setStartDate} />
       <br></br>
       <Button variant="outline" color="indigo" onClick={backbutton}>
         <Link href="/todo">戻る</Link>

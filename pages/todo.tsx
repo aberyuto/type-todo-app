@@ -3,7 +3,12 @@ import { InputForm } from "../src/components/InputForm";
 import { TodoList } from "../src/components/TodoList";
 import { useContext, useState } from "react";
 import { Completed } from "../src/components/Completed";
-import { TodosContext } from "./_app";
+
+import task_list from "../src/list/task_list";
+import { TodoContext } from "../src/components/providers/TodoProvider";
+import { DetailContext, TodosContext } from "./_app";
+import { DetailList } from "../src/components/DetilDisplay";
+
 import { SimpleDatePicker } from "../src/components/Calendar";
 
 export type Task = {
@@ -11,6 +16,12 @@ export type Task = {
   id: number;
   text: string;
   completed: boolean;
+  item: string[];
+};
+
+type Item = {
+  item: string;
+  setItem: (detail: DetailList[]) => void;
 };
 
 export type DateList = { tododate: Date };
@@ -19,6 +30,7 @@ function App() {
   //const [taskList, setTaskList] = useState<Task[]>([]);
 
   const { taskList, setTaskList } = useContext(TodosContext);
+  const { detailList, setDetailList } = useContext(DetailContext);
 
   return (
     <>

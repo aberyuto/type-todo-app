@@ -2,8 +2,6 @@ import Link from "next/link";
 import { Button } from "@mantine/core";
 import React, { useContext, useState } from "react";
 
-import DeatilDisplay, { DetailList } from "./DetilDisplay";
-
 import { Task } from "../../pages/todo";
 import { SimpleDatePicker } from "./Calendar";
 import { DateContext } from "../../pages/_app";

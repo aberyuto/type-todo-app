@@ -4,8 +4,6 @@ import { Task } from "../../pages/todo";
 import { Button } from "@mantine/core";
 import { Input } from "@mantine/core";
 import { useContext } from "react";
-import type { AppProps } from "next/app";
-import { TodoContext } from "./providers/TodoProvider";
 
 import { SimpleDatePicker } from "./Calendar";
 import { DateContext } from "../../pages/_app";
@@ -33,14 +31,6 @@ export default function DeatilDisplay({
 
   const handleChange = (e: any) => {
     setInputText(e.target.value);
-  };
-  const [detailList, setDetailList] = useState<DetailList[]>([]);
-
-  const addList = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setDetailList([...detailList, { item: inputText }]);
-
-    console.log(detailList);
   };
 
   const handleItem = (e: FormEvent<HTMLFormElement>) => {
@@ -80,9 +70,7 @@ export default function DeatilDisplay({
       </form>
 
       <p>コンテンツの詳細</p>
-      {detailList.map((detailList, index) => (
-        <li key={index}>{detailList.item}</li>
-      ))}
+
       {array?.map((item, index) => (
         <li key={index}>{item}</li>
       ))}

@@ -1,10 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import Validate from "../src/Validate/Validate";
-import Link from "next/link";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { Button } from "@mantine/core";
-
-import { Input } from "@mantine/core";
 
 export type Initial = {
   username: string;

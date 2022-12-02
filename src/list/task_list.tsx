@@ -1,20 +1,7 @@
-import { useState } from "react";
-import { Task } from "../../pages/todo";
+import React from "react";
 
-function task_list({ id, text, completed }: Task) {
-  const [taskList, setTaskList] = useState<Task[]>([]);
-  setTaskList([
-    //第一引数に最初のオブジェクトの情報
-    //第二引数にオブジェクト
-    ...taskList,
-    {
-      id: id,
-      text: text,
-      completed: completed,
-    },
-  ]);
-
-  return taskList;
+function task_list() {
+  return <div>task_list</div>;
 }
 
 export default task_list;
